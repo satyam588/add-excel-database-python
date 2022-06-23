@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <title>Upload excel file</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-3">
+      <div class="container">
+        <a class="navbar-brand" href="/">Home</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse"
+          id="navbarSupportedContent"
+        >
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/"
+                >Upload Excel</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/list">List Data</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main class="my-5">
+      <div class="col-4 mx-auto">
+        <h4 class="my-4">Please Upload excel File:</h4>
+        <form method="POST" enctype="multipart/form-data" name="mainForm">
+          {% csrf_token %}
+          <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupFile01"
+              >Upload</label
+            >
+            <input
+              type="file"
+              class="form-control"
+              id="inputGroupFile01"
+              name="excel_file"
+              required
+              onchange="checkExt();"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary" id="submit">
+            Submit Form
+          </button>
+        </form>
+      </div>
+    </main>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      function checkExt() {
+       if(document.mainForm.excel_file.value.lastIndexOf(".xlsx")==-1) {
+          alert("Please Upload Excel file");
+          document.getElementById("submit").setAttribute("disabled", ""); 
+
+          return false;
+       } else {
+        document.getElementById("submit").removeAttribute("disabled", ""); 
+       }
+      }
+      </script>
+  </body>
+</html>
